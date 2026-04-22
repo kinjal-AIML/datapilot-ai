@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DataPilot AI — upload, ask, decide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">◆</span>
+        <div>
+          <h1>DataPilot AI</h1>
+          <p class="tagline">Upload sales &amp; purchase data. Ask a question. Get a dashboard.</p>
+        </div>
+      </div>
+      <div id="mode-indicator" class="mode-pill" title="Analyst backend mode">…</div>
+    </header>
+ 
+    <main class="layout">
+      <!-- Upload & schema sidebar -->
+      <aside class="sidebar" aria-label="Data uploads">
+        <section class="panel">
+          <h2>1 · Upload data</h2>
+          <form id="upload-form">
+            <label class="file">
+              <span>Sales file</span>
+              <input type="file" id="sales-file" name="sales" accept=".csv,.xlsx,.xls,.xlsm" />
+            </label>
+            <label class="file">
+              <span>Purchase file</span>
+              <input type="file" id="purchase-file" name="purchase" accept=".csv,.xlsx,.xls,.xlsm" />
+            </label>
+            <button type="submit" class="primary" id="upload-btn">Upload</button>
+          </form>
+          <p id="upload-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+ 
+        <section class="panel" id="schema-panel" hidden>
+          <h2>Detected schema</h2>
+          <div id="schema-content"></div>
+        </section>
+      </aside>
+ 
+      <!-- Ask + dashboard -->
+      <section class="content">
+        <section class="panel ask">
+          <h2>2 · Ask a question</h2>
+          <form id="ask-form">
+            <textarea
+              id="question"
+              rows="2"
+              placeholder="e.g. What is the monthly profit? Top 5 products by revenue. Revenue by country."
+              required
+            ></textarea>
+            <div class="examples" id="example-chips">
+              <button type="button" data-q="Give me an overall summary">Overall summary</button>
+              <button type="button" data-q="What is the monthly revenue trend?">Monthly revenue</button>
+              <button type="button" data-q="Show monthly profit trend">Monthly profit</button>
+              <button type="button" data-q="Top 5 products by revenue">Top 5 products</button>
+              <button type="button" data-q="Top 5 customers by revenue">Top customers</button>
+              <button type="button" data-q="Revenue by country">Revenue by country</button>
+              <button type="button" data-q="Cost by vendor">Cost by vendor</button>
+            </div>
+            <button type="submit" class="primary" id="ask-btn">Run analysis</button>
+          </form>
+          <p id="ask-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+ 
+        <section id="dashboard" class="dashboard" hidden>
+          <div class="kpis">
+            <div class="kpi" data-metric="total_revenue">
+              <span class="kpi-label">Total revenue</span>
+              <span class="kpi-value">—</span>
+            </div>
+            <div class="kpi" data-metric="total_profit">
+              <span class="kpi-label">Total profit</span>
+              <span class="kpi-value">—</span>
+            </div>
+            <div class="kpi" data-metric="total_orders">
+              <span class="kpi-label">Total orders</span>
+              <span class="kpi-value">—</span>
+            </div>
+          </div>
+ 
+          <div class="panel explanation">
+            <h3>Explanation</h3>
+            <p id="explanation">—</p>
+            <details>
+              <summary>Show generated query</summary>
+              <pre id="generated-query">—</pre>
+              <p class="meta">
+                <span id="intent-pill" class="pill">intent</span>
+                <span id="dims-pill" class="pill">dims</span>
+                <span id="metrics-pill" class="pill">metrics</span>
+              </p>
+            </details>
+          </div>
+ 
+          <div class="panel chart-panel">
+            <h3 id="chart-title">Chart</h3>
+            <div class="chart-wrap">
+              <canvas id="result-chart"></canvas>
+            </div>
+          </div>
+ 
+          <div class="panel insights">
+            <h3>Insights</h3>
+            <ul id="insights-list"></ul>
+          </div>
+ 
+          <div class="panel table-panel">
+            <h3>Data</h3>
+            <div class="table-wrap">
+              <table id="result-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+ 
+        <section id="error-card" class="panel error" hidden>
+          <h3>Can't answer that</h3>
+          <p id="error-message">—</p>
+        </section>
+      </section>
+    </main>
+ 
+    <footer class="footer">
+      <span>DataPilot AI · deterministic mock analyst + optional LLM</span>
+    </footer>
+  </body>
+</html>
