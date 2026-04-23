@@ -11,6 +11,7 @@ import io
 import re
 import threading
 import uuid
+import warnings
 from dataclasses import dataclass, field
 from typing import Any
  
@@ -80,8 +81,14 @@ def read_tabular(filename: str, raw: bytes) -> pd.DataFrame:
     # Coerce date-looking columns to datetime where possible.
     for col in df.columns:
         if "date" in col:
-            df[col] = pd.to_datetime(df[col], errors="coerce")
+            df[col] = _to_datetime_safe(df[col])
     return df
+
+
+def _to_datetime_safe(series: pd.Series) -> pd.Series:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        return pd.to_datetime(series, errors="coerce")
  
  
 @dataclass
