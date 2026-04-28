@@ -1,0 +1,22 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mnt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B8E8D0"/>
+      <stop offset="100%" stop-color="#7CC9A5"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="60" width="120" height="90" rx="14" fill="url(#mnt)"/>
+  <rect x="48" y="68" width="104" height="74" rx="10" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+  <!-- Mint leaves -->
+  <ellipse cx="90" cy="45" rx="10" ry="16" fill="#5CAA82" opacity="0.7" transform="rotate(-20 90 45)"/>
+  <line x1="88" y1="35" x2="92" y2="55" stroke="#4A9070" stroke-width="0.8"/>
+  <ellipse cx="112" cy="42" rx="8" ry="13" fill="#5CAA82" opacity="0.6" transform="rotate(15 112 42)"/>
+  <line x1="110" y1="33" x2="114" y2="52" stroke="#4A9070" stroke-width="0.8"/>
+  <!-- Cool sparkles -->
+  <circle cx="70" cy="85" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="130" cy="95" r="1" fill="white" opacity="0.3"/>
+  <circle cx="85" cy="115" r="1.5" fill="white" opacity="0.35"/>
+  <!-- Label -->
+  <text x="100" y="112" text-anchor="middle" font-family="serif" font-size="10" fill="#2A6B50" opacity="0.8">MINT</text>
+  <ellipse cx="100" cy="160" rx="55" ry="8" fill="#3A3A3A" opacity="0.06"/>
+</svg>

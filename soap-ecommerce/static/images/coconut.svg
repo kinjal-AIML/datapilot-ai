@@ -1,0 +1,22 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="coc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF8EE"/>
+      <stop offset="100%" stop-color="#F0DFC0"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="60" width="120" height="90" rx="14" fill="url(#coc)"/>
+  <rect x="48" y="68" width="104" height="74" rx="10" fill="none" stroke="#C4A882" stroke-width="0.8" opacity="0.3"/>
+  <!-- Coconut half -->
+  <circle cx="100" cy="42" r="14" fill="#8B6B30" opacity="0.6"/>
+  <circle cx="100" cy="42" r="10" fill="white" opacity="0.8"/>
+  <circle cx="96" cy="38" r="1.5" fill="#8B6B30" opacity="0.3"/>
+  <circle cx="104" cy="38" r="1.5" fill="#8B6B30" opacity="0.3"/>
+  <circle cx="100" cy="44" r="1" fill="#8B6B30" opacity="0.3"/>
+  <!-- Vanilla bean line -->
+  <line x1="130" y1="40" x2="140" y2="58" stroke="#5C4A32" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="135" cy="49" r="1" fill="#5C4A32" opacity="0.3"/>
+  <!-- Label -->
+  <text x="100" y="112" text-anchor="middle" font-family="serif" font-size="10" fill="#8B6B30" opacity="0.7">COCONUT</text>
+  <ellipse cx="100" cy="160" rx="55" ry="8" fill="#3A3A3A" opacity="0.06"/>
+</svg>

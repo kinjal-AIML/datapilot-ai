@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ════════════ HERO ════════════ -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-beige">
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image:url('data:image/svg+xml,<svg width=\"60\" height=\"60\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"30\" cy=\"30\" r=\"1.5\" fill=\"%238B7355\"/></svg>');"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center relative z-10 py-20">
+    <div class="space-y-8 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium">Artisan Soap Collection</p>
+      <h1 class="font-display text-5xl md:text-7xl font-semibold leading-[1.1] text-brown-dark">
+        Pure.<br/>Natural.<br/>Luxurious.
+      </h1>
+      <p class="text-charcoal/70 text-lg max-w-md leading-relaxed">
+        Each bar is handcrafted with ethically sourced botanicals, nourishing oils, and pure essential oils — a daily ritual of natural luxury.
+      </p>
+      <div class="flex gap-4 pt-2">
+        <a href="/products" class="btn-primary">Explore Collection</a>
+        <a href="/about" class="btn-secondary">Our Story</a>
+      </div>
+    </div>
+    <div class="relative fade-up delay-200">
+      <div class="w-full aspect-square bg-sand/50 rounded-[2rem] flex items-center justify-center overflow-hidden">
+        <svg class="w-3/4 h-3/4" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="200" cy="210" rx="150" ry="120" fill="#E8DDD3"/>
+          <ellipse cx="200" cy="200" rx="140" ry="110" fill="#F5EDE3"/>
+          <ellipse cx="200" cy="190" rx="120" ry="95" fill="#FAF7F2"/>
+          <path d="M130 160 C150 100, 250 100, 270 160" stroke="#C4A882" stroke-width="2" fill="none" opacity="0.5"/>
+          <circle cx="170" cy="170" r="4" fill="#C4A882" opacity="0.4"/>
+          <circle cx="220" cy="155" r="3" fill="#C4A882" opacity="0.3"/>
+          <circle cx="195" cy="180" r="5" fill="#C4A882" opacity="0.25"/>
+          <text x="200" y="210" text-anchor="middle" font-family="Playfair Display,serif" font-size="18" fill="#8B7355" opacity="0.7">Luxe Lather</text>
+        </svg>
+      </div>
+      <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-lg p-5 fade-up delay-400">
+        <p class="text-xs text-brown uppercase tracking-widest mb-1">Handcrafted</p>
+        <p class="font-display text-lg text-brown-dark">100% Natural</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FEATURED PRODUCTS ════════════ -->
+<section class="py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium mb-3">Curated Selection</p>
+      <h2 class="font-display text-4xl md:text-5xl text-brown-dark">Featured Collection</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {% for product in featured_products %}
+      <a href="/product/{{ product.id }}" class="group block fade-up" style="animation-delay:{{ loop.index * 100 }}ms">
+        <div class="bg-beige rounded-2xl overflow-hidden transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
+          <div class="aspect-square flex items-center justify-center p-8 bg-sand/30">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="w-3/4 h-3/4 object-contain transition-transform duration-500 group-hover:scale-105" />
+          </div>
+          <div class="p-6 text-center">
+            <p class="text-xs text-brown tracking-widest uppercase mb-2">{{ product.category }}</p>
+            <h3 class="font-display text-xl text-brown-dark mb-1">{{ product.name }}</h3>
+            <p class="text-sm text-charcoal/60 mb-3">{{ product.tagline }}</p>
+            <div class="flex items-center justify-center gap-1 mb-3">
+              {% for i in range(5) %}
+              <svg class="w-3.5 h-3.5 {{ 'text-brown' if i < product.rating|int else 'text-sand' }}" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              {% endfor %}
+              <span class="text-xs text-charcoal/50 ml-1">{{ product.rating }}</span>
+            </div>
+            <p class="font-display text-lg text-brown-dark">${{ "%.2f"|format(product.price) }}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-14 fade-up">
+      <a href="/products" class="btn-primary">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ BRAND STORY PREVIEW ════════════ -->
+<section class="py-24 bg-beige">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="fade-up">
+      <div class="aspect-[4/3] bg-sand/50 rounded-2xl flex items-center justify-center">
+        <svg class="w-2/3" viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="260" height="180" rx="20" fill="#E8DDD3"/>
+          <circle cx="100" cy="120" r="50" fill="#F5EDE3"/>
+          <circle cx="200" cy="100" r="40" fill="#FAF7F2"/>
+          <path d="M80 160 Q150 80 220 160" stroke="#C4A882" stroke-width="2" fill="none"/>
+          <circle cx="150" cy="60" r="15" fill="#C4A882" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="space-y-6 fade-up delay-200">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium">Our Philosophy</p>
+      <h2 class="font-display text-4xl md:text-5xl text-brown-dark leading-tight">Crafted with Intention, Rooted in Nature</h2>
+      <p class="text-charcoal/70 leading-relaxed">
+        Every Luxe Lather bar begins with a story — of ethically harvested botanicals, cold-pressed oils, and the patient hands of our artisans. We believe skincare should be a sensory ritual, not a rushed routine.
+      </p>
+      <p class="text-charcoal/70 leading-relaxed">
+        From sourcing to packaging, every decision honors our commitment to sustainability, transparency, and the timeless art of soap making.
+      </p>
+      <a href="/about" class="btn-secondary inline-block mt-2">Read Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section class="py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium mb-3">Kind Words</p>
+      <h2 class="font-display text-4xl md:text-5xl text-brown-dark">What Our Customers Say</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {% for t in testimonials %}
+      <div class="bg-beige rounded-2xl p-10 fade-up" style="animation-delay:{{ loop.index * 150 }}ms">
+        <svg class="w-8 h-8 text-brown/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="text-charcoal/70 leading-relaxed mb-6 italic">{{ t.text }}</p>
+        <div>
+          <p class="font-display text-brown-dark font-medium">{{ t.author }}</p>
+          <p class="text-xs text-charcoal/50 uppercase tracking-wider">{{ t.title }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ AI RECOMMENDATION ════════════ -->
+<section class="py-24 bg-beige" id="recommendations">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-16 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium mb-3">Personalized For You</p>
+      <h2 class="font-display text-4xl md:text-5xl text-brown-dark">Find Your Perfect Soap</h2>
+      <p class="text-charcoal/60 mt-4 max-w-lg mx-auto">Our recommendation engine analyzes your skin type and scent preferences to curate the ideal selection for you.</p>
+    </div>
+
+    <div class="max-w-xl mx-auto bg-white rounded-2xl shadow-sm p-10 fade-up">
+      <form id="recommend-form" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-brown-dark mb-2">Your Skin Type</label>
+          <select id="rec-skin" class="w-full border border-sand rounded-xl px-4 py-3 bg-cream text-charcoal focus:outline-none focus:ring-2 focus:ring-brown-light transition-all">
+            <option value="">Select skin type</option>
+            {% for st in skin_types %}
+            <option value="{{ st }}">{{ st|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-brown-dark mb-2">Scent Preference</label>
+          <select id="rec-scent" class="w-full border border-sand rounded-xl px-4 py-3 bg-cream text-charcoal focus:outline-none focus:ring-2 focus:ring-brown-light transition-all">
+            <option value="">Select scent</option>
+            {% for sc in scents %}
+            <option value="{{ sc }}">{{ sc|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center">Get Recommendations</button>
+      </form>
+    </div>
+
+    <!-- Results rendered by JS -->
+    <div id="rec-results" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 hidden"></div>
+    <p id="rec-empty" class="text-center text-charcoal/50 mt-8 hidden">No recommendations found. Try adjusting your preferences.</p>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/recommend.js"></script>
+{% endblock %}

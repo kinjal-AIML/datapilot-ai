@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Your Cart — Luxe Lather{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-cream min-h-[70vh]">
+  <div class="max-w-4xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-12 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium mb-3">Your Selection</p>
+      <h1 class="font-display text-4xl md:text-5xl text-brown-dark">Shopping Cart</h1>
+    </div>
+
+    <!-- Empty state -->
+    <div id="cart-empty" class="text-center py-20 hidden fade-up">
+      <svg class="w-20 h-20 text-sand mx-auto mb-6" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+      </svg>
+      <p class="text-charcoal/50 text-lg mb-6">Your cart is empty</p>
+      <a href="/products" class="btn-primary">Continue Shopping</a>
+    </div>
+
+    <!-- Cart items -->
+    <div id="cart-items" class="space-y-6 fade-up">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Summary -->
+    <div id="cart-summary" class="mt-12 bg-beige rounded-2xl p-8 hidden fade-up">
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-charcoal/60">Subtotal</span>
+        <span id="cart-subtotal" class="font-display text-xl text-brown-dark">$0.00</span>
+      </div>
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-charcoal/60">Shipping</span>
+        <span class="text-sm text-brown">Free over $40</span>
+      </div>
+      <div class="border-t border-sand pt-6 flex justify-between items-center mb-8">
+        <span class="font-display text-lg text-brown-dark">Total</span>
+        <span id="cart-total" class="font-display text-2xl text-brown-dark">$0.00</span>
+      </div>
+      <button class="btn-primary w-full justify-center" onclick="alert('Checkout coming soon — thank you for your interest!')">
+        Proceed to Checkout
+      </button>
+      <a href="/products" class="block text-center text-sm text-brown hover:text-brown-dark mt-4 transition-colors">
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/cart.js"></script>
+{% endblock %}
