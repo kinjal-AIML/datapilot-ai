@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Shop — Luxe Lather{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-beige">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center mb-12 fade-up">
+      <p class="text-brown text-sm tracking-[0.3em] uppercase font-medium mb-3">Our Collection</p>
+      <h1 class="font-display text-4xl md:text-5xl text-brown-dark">Artisan Soaps</h1>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap justify-center gap-4 mb-14 fade-up">
+      <div class="flex items-center gap-2">
+        <label class="text-sm text-charcoal/70 font-medium">Skin Type:</label>
+        <select id="filter-skin" class="border border-sand rounded-xl px-4 py-2 bg-cream text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-brown-light">
+          <option value="">All</option>
+          {% for st in skin_types %}
+          <option value="{{ st }}" {{ 'selected' if active_skin == st }}>{{ st|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="flex items-center gap-2">
+        <label class="text-sm text-charcoal/70 font-medium">Scent:</label>
+        <select id="filter-scent" class="border border-sand rounded-xl px-4 py-2 bg-cream text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-brown-light">
+          <option value="">All</option>
+          {% for sc in scents %}
+          <option value="{{ sc }}" {{ 'selected' if active_scent == sc }}>{{ sc|capitalize }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button id="clear-filters" class="text-sm text-brown hover:text-brown-dark underline underline-offset-4 transition-colors">Clear Filters</button>
+    </div>
+
+    {% if products %}
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {% for product in products %}
+      <a href="/product/{{ product.id }}" class="group block fade-up" style="animation-delay:{{ loop.index * 80 }}ms">
+        <div class="bg-cream rounded-2xl overflow-hidden transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
+          <div class="aspect-square flex items-center justify-center p-8 bg-sand/20">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="w-3/4 h-3/4 object-contain transition-transform duration-500 group-hover:scale-105" />
+          </div>
+          <div class="p-6 text-center">
+            <p class="text-xs text-brown tracking-widest uppercase mb-2">{{ product.category }}</p>
+            <h3 class="font-display text-xl text-brown-dark mb-1">{{ product.name }}</h3>
+            <p class="text-sm text-charcoal/60 mb-2">{{ product.tagline }}</p>
+            <div class="flex items-center justify-center gap-1 mb-3">
+              {% for i in range(5) %}
+              <svg class="w-3.5 h-3.5 {{ 'text-brown' if i < product.rating|int else 'text-sand' }}" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              {% endfor %}
+              <span class="text-xs text-charcoal/50 ml-1">{{ product.rating }}</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 mb-4">
+              {% for st in product.skin_types %}
+              <span class="text-[10px] uppercase tracking-wider bg-sand/50 text-brown px-2 py-0.5 rounded-full">{{ st }}</span>
+              {% endfor %}
+            </div>
+            <p class="font-display text-lg text-brown-dark">${{ "%.2f"|format(product.price) }}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-20 fade-up">
+      <p class="text-charcoal/50 text-lg mb-4">No products match your filters.</p>
+      <a href="/products" class="btn-secondary">View All Products</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('filter-skin').addEventListener('change', applyFilters);
+  document.getElementById('filter-scent').addEventListener('change', applyFilters);
+  document.getElementById('clear-filters').addEventListener('click', () => {
+    window.location.href = '/products';
+  });
+
+  function applyFilters() {
+    const skin = document.getElementById('filter-skin').value;
+    const scent = document.getElementById('filter-scent').value;
+    const params = new URLSearchParams();
+    if (skin) params.set('skin_type', skin);
+    if (scent) params.set('scent', scent);
+    window.location.href = '/products' + (params.toString() ? '?' + params.toString() : '');
+  }
+</script>
+{% endblock %}

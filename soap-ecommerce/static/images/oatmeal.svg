@@ -1,0 +1,22 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="oat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0DFC0"/>
+      <stop offset="100%" stop-color="#D4BC8A"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="60" width="120" height="90" rx="14" fill="url(#oat)"/>
+  <rect x="48" y="68" width="104" height="74" rx="10" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+  <!-- Oat flecks -->
+  <ellipse cx="65" cy="85" rx="3" ry="1.5" fill="#C4A060" opacity="0.4" transform="rotate(20 65 85)"/>
+  <ellipse cx="90" cy="95" rx="2.5" ry="1" fill="#C4A060" opacity="0.3" transform="rotate(-15 90 95)"/>
+  <ellipse cx="120" cy="80" rx="3" ry="1.5" fill="#C4A060" opacity="0.35" transform="rotate(40 120 80)"/>
+  <ellipse cx="135" cy="110" rx="2" ry="1" fill="#C4A060" opacity="0.3" transform="rotate(-25 135 110)"/>
+  <ellipse cx="75" cy="120" rx="2.5" ry="1" fill="#C4A060" opacity="0.25" transform="rotate(10 75 120)"/>
+  <!-- Honey drip -->
+  <path d="M100 45 Q97 52 100 55 Q103 52 100 45Z" fill="#D4A030" opacity="0.7"/>
+  <circle cx="100" cy="56" r="4" fill="#D4A030" opacity="0.6"/>
+  <!-- Label -->
+  <text x="100" y="112" text-anchor="middle" font-family="serif" font-size="10" fill="#8B6B30" opacity="0.7">OATMEAL</text>
+  <ellipse cx="100" cy="160" rx="55" ry="8" fill="#3A3A3A" opacity="0.06"/>
+</svg>

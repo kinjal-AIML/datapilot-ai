@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Luxe Lather — Handcrafted Luxury Soaps{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:    '#FAF7F2',
+            beige:    '#F5EDE3',
+            sand:     '#E8DDD3',
+            brown:    { light: '#C4A882', DEFAULT: '#8B7355', dark: '#5C4A32' },
+            charcoal: '#3A3A3A',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body class="bg-cream font-body text-charcoal antialiased">
+
+  <!-- ───────── Navbar ───────── -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
+      <a href="/" class="font-display text-2xl font-semibold tracking-wide text-brown-dark hover:text-brown transition-colors">
+        Luxe Lather
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide uppercase">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products" class="nav-link">Shop</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li>
+          <a href="/cart" class="nav-link relative">
+            Cart
+            <span id="cart-count" class="absolute -top-2 -right-4 bg-brown text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center opacity-0 transition-opacity">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-sand">
+      <ul class="flex flex-col items-center gap-6 py-8 text-sm font-medium tracking-wide uppercase">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products" class="nav-link">Shop</a></li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/cart" class="nav-link">Cart <span id="cart-count-mobile" class="text-brown">(0)</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ───────── Main Content ───────── -->
+  <main class="pt-20">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ───────── Footer ───────── -->
+  <footer class="bg-brown-dark text-sand/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <div class="grid md:grid-cols-4 gap-12">
+        <!-- Brand -->
+        <div class="md:col-span-1">
+          <h3 class="font-display text-xl text-white mb-4">Luxe Lather</h3>
+          <p class="text-sm leading-relaxed">
+            Handcrafted with intention. Each bar is a testament to our commitment to purity, sustainability, and the art of self-care.
+          </p>
+        </div>
+        <!-- Quick links -->
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-widest text-white mb-4">Shop</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/products" class="hover:text-white transition-colors">All Products</a></li>
+            <li><a href="/products?skin_type=dry" class="hover:text-white transition-colors">For Dry Skin</a></li>
+            <li><a href="/products?skin_type=oily" class="hover:text-white transition-colors">For Oily Skin</a></li>
+            <li><a href="/products?skin_type=sensitive" class="hover:text-white transition-colors">For Sensitive Skin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-widest text-white mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/about" class="hover:text-white transition-colors">Our Story</a></li>
+            <li><a href="/about#sustainability" class="hover:text-white transition-colors">Sustainability</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-sm uppercase tracking-widest text-white mb-4">Connect</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Pinterest</a></li>
+            <li><a href="mailto:hello@luxelather.com" class="hover:text-white transition-colors">hello@luxelather.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 text-center text-xs">
+        &copy; 2026 Luxe Lather. All rights reserved. Handcrafted with care.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
